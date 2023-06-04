@@ -22,6 +22,8 @@ time.sleep(5)
 html = driver.page_source
 soup = BeautifulSoup(html, "html.parser")
 
+#Ürünün Görsellerini al
+
 # İlgili <div> etiketini bul
 div_tag = soup.find("div", {"style": "position: relative;"})
 
@@ -47,5 +49,16 @@ for div_element in div_elements:
     img_element = div_element.find_element(By.TAG_NAME, "img")
     img_src = img_element.get_attribute("src")
     print("Görsel Linki:", img_src)
+
+# Ürünün ismini al
+urun_isim = soup.find("h1", class_="pr-new-br", attrs={"data-drroot": "h1"})
+urun_isim_kodsuz = urun_isim.find("span")
+veri = urun_isim_kodsuz.get_text(strip=True)
+print(veri)
+
+
+# Ürün fiyatı al
+
+
 
 driver.quit()
